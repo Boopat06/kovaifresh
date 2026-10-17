@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1f7a3d">
+<title>KovaiFresh – Vegetable Delivery</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2f6ef;--card:#fff;--ink:#14301c;--mute:#5d7263;--g:#1f7a3d;--g2:#e1f0e3;--y:#f2b01e;--r:#d6402b;--line:#dbe5d8;--shadow:rgba(20,48,28,.12);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1b13;--card:#182a1e;--ink:#e8f2ea;--mute:#9bb2a1;--g:#4fbf74;--g2:#1e3a28;--line:#2b4433;--shadow:rgba(0,0,0,.4)}}
+:root[data-theme="dark"]{--bg:#0f1b13;--card:#182a1e;--ink:#e8f2ea;--mute:#9bb2a1;--g:#4fbf74;--g2:#1e3a28;--line:#2b4433;--shadow:rgba(0,0,0,.4)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:16px/1.4 'Nunito Sans',system-ui,sans-serif;display:flex;justify-content:center}
+#app{width:100%;max-width:440px;height:100%;display:flex;flex-direction:column;background:var(--bg);position:relative}
+h1,h2,h3{font-family:'Bricolage Grotesque','Nunito Sans',system-ui,sans-serif;margin:0}
+header{padding:14px 16px 10px;display:flex;align-items:center;justify-content:space-between;background:var(--g);color:#fff}
+header h1{font-size:22px;font-weight:800}
+header small{opacity:.85;display:block;font-size:12px}
+main{flex:1;overflow-y:auto;padding:14px 14px 90px}
+nav{position:absolute;bottom:0;left:0;right:0;display:flex;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;border:0;background:none;padding:9px 0 8px;font:600 12px 'Nunito Sans',sans-serif;color:var(--mute);position:relative}
+nav button span{display:block;font-size:21px}
+nav button.on{color:var(--g)}
+.badge{position:absolute;top:4px;left:56%;background:var(--r);color:#fff;border-radius:10px;font-size:11px;padding:0 6px;font-weight:700}
+.card{background:var(--card);border-radius:14px;padding:12px;margin-bottom:12px;box-shadow:0 1px 4px var(--shadow)}
+.banner{background:var(--y);color:#3a2a00;border-radius:14px;padding:14px;margin-bottom:12px;display:flex;gap:10px;align-items:center}
+.banner b{font-family:'Bricolage Grotesque',sans-serif;font-size:18px}
+input,select,textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit;margin:4px 0 10px}
+.search{margin:0 0 10px}
+.chips{display:flex;gap:8px;overflow-x:auto;margin-bottom:12px;padding-bottom:2px}
+.chip{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:20px;padding:7px 14px;font:600 14px 'Nunito Sans',sans-serif}
+.chip.on{background:var(--g);color:#fff;border-color:var(--g)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.p{background:var(--card);border-radius:14px;padding:10px;text-align:center;box-shadow:0 1px 4px var(--shadow)}
+.p .e{font-size:44px;line-height:1.2}
+.p b{display:block}.p small{color:var(--mute)}
+.price{font-weight:700;color:var(--g);margin:2px 0 8px}
+.btn{border:0;border-radius:10px;background:var(--g);color:#fff;padding:12px 16px;font:700 16px 'Nunito Sans',sans-serif;width:100%}
+.btn.alt{background:var(--g2);color:var(--g)}
+.btn.sm{padding:8px;font-size:14px}
+.wa{background:#25a244}
+.qty{display:flex;align-items:center;justify-content:center;gap:12px}
+.qty button{width:34px;height:34px;border-radius:50%;border:0;background:var(--g2);color:var(--g);font-size:20px;font-weight:700}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.line{padding:6px 0;border-bottom:1px solid var(--line)}
+.tot{font-size:18px;font-weight:800}
+.step{display:flex;gap:12px;align-items:center;padding:8px 0;color:var(--mute)}
+.step i{width:26px;height:26px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-style:normal;font-size:13px}
+.step.done{color:var(--ink)}.step.done i{background:var(--g);border-color:var(--g);color:#fff}
+.step.cur i{border-color:var(--y);background:var(--y);color:#3a2a00}
+.stars button{background:none;border:0;font-size:32px;color:var(--line)}.stars button.on{color:var(--y)}
+.pay{display:flex;gap:8px;margin-bottom:10px}
+.pay button{flex:1;padding:10px 4px;border-radius:10px;border:2px solid var(--line);background:var(--card);color:var(--ink);font:700 14px 'Nunito Sans',sans-serif}
+.pay button.on{border-color:var(--g);background:var(--g2)}
+.note{font-size:13px;color:var(--mute)}
+.toast{position:absolute;left:50%;bottom:84px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:20px;font-size:14px;z-index:9;max-width:90%;text-align:center}
+.empty{text-align:center;color:var(--mute);padding:40px 10px}
+.empty .e{font-size:50px}
+.kpi{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center}
+.kpi b{display:block;font:800 20px 'Bricolage Grotesque',sans-serif;color:var(--g)}
+.kpi small{color:var(--mute)}
+.h{font-size:18px;margin:4px 0 10px;font-weight:700}
+</style>
+</head>
+<body>
+<div id="app">
+  <header><div><h1>🥬 KovaiFresh</h1><small id="sub">Fresh from the shop to your door</small></div><button class="chip" id="wa" style="background:#25a244;color:#fff;border:0">💬 WhatsApp</button></header>
+  <main id="main"></main>
+  <nav id="nav"></nav>
+</div>
+<script>
+const P=[
+{id:1,n:'Tomato',e:'🍅',c:'Vegetables',p:32},{id:2,n:'Onion',e:'🧅',c:'Vegetables',p:28},{id:3,n:'Potato',e:'🥔',c:'Vegetables',p:30},
+{id:4,n:'Carrot',e:'🥕',c:'Vegetables',p:48},{id:5,n:'Brinjal',e:'🍆',c:'Vegetables',p:40},{id:6,n:'Green Chilli',e:'🌶️',c:'Vegetables',p:60},
+{id:7,n:'Spinach',e:'🥬',c:'Leafy',p:25},{id:8,n:'Coriander',e:'🌿',c:'Leafy',p:20},{id:9,n:'Banana',e:'🍌',c:'Fruits',p:55},
+{id:10,n:'Apple',e:'🍎',c:'Fruits',p:160},{id:11,n:'Mango',e:'🥭',c:'Fruits',p:120},{id:12,n:'Grapes',e:'🍇',c:'Fruits',p:90}];
+const CATS=['All','Vegetables','Leafy','Fruits'];
+const STEPS=['Placed','Packed','Out for delivery','Delivered'];
+const COUPONS={FRESH10:{t:'pct',v:10,d:'10% off'},WELCOME20:{t:'flat',v:20,d:'₹20 off'}};
+let S={user:null,tab:'shop',cat:'All',q:'',cart:{},coupon:null,pay:'UPI',orders:[],pts:0,view:null,rate:0,toastT:null};
+const $=s=>document.querySelector(s), main=$('#main');
+const inr=n=>'₹'+Math.round(n);
+function load(){try{const d=JSON.parse(localStorage.getItem('kf')||'null');if(d){S.user=d.user;S.orders=d.orders||[];S.pts=d.pts||0}}catch(e){}}
+function save(){try{localStorage.setItem('kf',JSON.stringify({user:S.user,orders:S.orders,pts:S.pts}))}catch(e){}}
+function toast(m){document.querySelectorAll('.toast').forEach(t=>t.remove());const t=document.createElement('div');t.className='toast';t.textContent=m;$('#app').appendChild(t);clearTimeout(S.toastT);S.toastT=setTimeout(()=>t.remove(),2200)}
+const count=()=>Object.values(S.cart).reduce((a,b)=>a+b,0);
+function bill(){let sub=0;for(const id in S.cart)sub+=P.find(x=>x.id==id).p*S.cart[id];
+ const cp=S.coupon?COUPONS[S.coupon]:null;const disc=cp?(cp.t=='pct'?sub*cp.v/100:Math.min(cp.v,sub)):0;
+ const fee=sub>0&&sub<300?30:0;return{sub,disc,fee,total:sub-disc+fee}}
+function add(id,d){S.cart[id]=(S.cart[id]||0)+d;if(S.cart[id]<=0)delete S.cart[id];if(!count())S.coupon=null;render()}
+function go(t,v){S.tab=t;S.view=v||null;render();main.scrollTop=0}
+function renderNav(){const T=[['shop','🏪','Shop'],['cart','🛒','Cart'],['orders','📦','Orders'],['profile','👤','Profile']];
+ $('#nav').innerHTML=T.map(([k,i,l])=>`<button class="${S.tab==k?'on':''}" onclick="go('${k}')"><span>${i}</span>${l}${k=='cart'&&count()?`<b class="badge">${count()}</b>`:''}</button>`).join('')}
+function qtyCtl(id){const q=S.cart[id]||0;return q?`<div class="qty"><button onclick="add(${id},-1)">−</button><b>${q}</b><button onclick="add(${id},1)">+</button></div>`:`<button class="btn sm" onclick="add(${id},1)">Add</button>`}
+
+function signup(){main.innerHTML=`<div class="card" style="margin-top:20px"><h2>Welcome 👋</h2><p class="note">Sign up to order. Your phone and address are used only for delivery.</p>
+<label>Name</label><input id="un" placeholder="Your name"><label>Mobile number</label><input id="up" inputmode="numeric" maxlength="10" placeholder="10-digit number"><label>Delivery address</label><textarea id="ua" rows="2" placeholder="Door no, street, area"></textarea>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:14px"><input id="uc" type="checkbox" style="width:auto;margin-top:3px">I agree to the use of my data for delivery as per the DPDP Act 2023.</label>
+<button class="btn" onclick="doSignup()">Create account</button></div>`;$('#nav').innerHTML=''}
+function doSignup(){const n=$('#un').value.trim(),p=$('#up').value.trim(),a=$('#ua').value.trim();
+ if(!n)return toast('Enter your name');if(!/^[6-9]\d{9}$/.test(p))return toast('Enter a valid 10-digit mobile number');if(!a)return toast('Enter your delivery address');if(!$('#uc').checked)return toast('Please accept the consent to continue');
+ S.user={n,p,a};save();toast('Account created. Try code WELCOME20');render()}
+
+function shop(){const list=P.filter(x=>(S.cat=='All'||x.c==S.cat)&&x.n.toLowerCase().includes(S.q.toLowerCase()));
+ main.innerHTML=`<div class="banner"><span style="font-size:34px">🎉</span><div><b>Use FRESH10 for 10% off</b><div style="font-size:13px">Free delivery above ₹300 · Delivery in 2 hours</div></div></div>
+<input class="search" id="sq" placeholder="🔍 Search vegetables or fruits" value="${S.q}" oninput="S.q=this.value;shopList()">
+<div class="chips">${CATS.map(c=>`<button class="chip ${S.cat==c?'on':''}" onclick="S.cat='${c}';shop()">${c}</button>`).join('')}</div><div class="grid" id="gl"></div>`;shopList()}
+function shopList(){const list=P.filter(x=>(S.cat=='All'||x.c==S.cat)&&x.n.toLowerCase().includes(S.q.toLowerCase()));
+ $('#gl').innerHTML=list.length?list.map(x=>`<div class="p"><div class="e">${x.e}</div><b>${x.n}</b><small>${x.c}</small><div class="price">${inr(x.p)}/kg</div>${qtyCtl(x.id)}</div>`).join(''):'<div class="empty" style="grid-column:1/-1"><div class="e">🔎</div>No items found. Try another name.</div>';renderNav()}
+// qty change on shop should not reset search focus
+const _add=add;add=function(id,d){S.cart[id]=(S.cart[id]||0)+d;if(S.cart[id]<=0)delete S.cart[id];if(!count())S.coupon=null;if(S.tab=='shop'){const y=main.scrollTop;shopList();main.scrollTop=y}else render()}
+
+function cart(){if(!count()){main.innerHTML=`<div class="empty"><div class="e">🛒</div><h3>Your cart is empty</h3><p>Add fresh produce from the shop.</p><button class="btn" onclick="go('shop')">Start shopping</button></div>`;return}
+ const b=bill();main.innerHTML=`<h2 class="h">Your cart</h2><div class="card">${Object.keys(S.cart).map(id=>{const x=P.find(y=>y.id==id);return`<div class="row line"><div>${x.e} <b>${x.n}</b><div class="note">${inr(x.p)}/kg × ${S.cart[id]} kg</div></div><div style="width:110px">${qtyCtl(x.id)}</div></div>`}).join('')}</div>
+<div class="card"><label><b>Coupon code</b></label><div class="row"><input id="cc" placeholder="FRESH10 or WELCOME20" value="${S.coupon||''}" style="margin:4px 0"><button class="btn sm" style="width:90px" onclick="applyC()">Apply</button></div>${S.coupon?`<div class="note" style="color:var(--g)">✔ ${S.coupon}: ${COUPONS[S.coupon].d}</div>`:''}</div>
+<div class="card"><div class="row line"><span>Subtotal</span><span>${inr(b.sub)}</span></div><div class="row line"><span>Discount</span><span>−${inr(b.disc)}</span></div><div class="row line"><span>Delivery fee ${b.sub>=300?'(free)':'(free above ₹300)'}</span><span>${inr(b.fee)}</span></div><div class="row tot" style="padding-top:8px"><span>Total</span><span>${inr(b.total)}</span></div></div>
+<button class="btn" onclick="go('cart','checkout')">Proceed to checkout</button>`}
+function applyC(){const c=$('#cc').value.trim().toUpperCase();if(!COUPONS[c])return toast('Invalid code. Try FRESH10');S.coupon=c;toast('Coupon applied');render()}
+
+function checkout(){const b=bill();if(!b.sub)return go('cart');
+ main.innerHTML=`<h2 class="h">Checkout</h2><div class="card"><b>Deliver to</b><p style="margin:4px 0" class="note">${S.user.n} · ${S.user.p}<br>${S.user.a}</p><label><b>Delivery slot</b></label><select id="slot"><option>Within 2 hours (express)</option><option>Today 6 pm – 8 pm</option><option>Tomorrow 7 am – 9 am</option></select></div>
+<div class="card"><b>Payment method</b><div class="pay" style="margin-top:8px">${['UPI','Card','COD'].map(m=>`<button class="${S.pay==m?'on':''}" onclick="S.pay='${m}';checkout()">${m=='COD'?'💵 Cash':m=='UPI'?'📱 UPI':'💳 Card'}</button>`).join('')}</div>
+${S.pay=='UPI'?'<input id="upi" placeholder="yourname@upi">':S.pay=='Card'?'<input id="cn" inputmode="numeric" maxlength="19" placeholder="Card number (demo – use 4111 1111 1111 1111)"><div class="row"><input placeholder="MM/YY" maxlength="5"><input placeholder="CVV" maxlength="3" type="password"></div>':'<p class="note">Pay in cash when your order arrives.</p>'}
+<p class="note">🔒 Payments run through an RBI-compliant gateway (simulated here). This app never stores card numbers.</p></div>
+<div class="card note">Refund policy: report damaged or stale items within 2 hours of delivery for a refund or replacement (Consumer Protection (E-Commerce) Rules 2020).</div>
+<button class="btn" id="pb" onclick="pay()">Pay ${inr(b.total)} & place order</button>`}
+function pay(){if(S.pay=='UPI'&&!/^[\w.\-]+@[\w]+$/.test($('#upi').value.trim()))return toast('Enter a valid UPI ID like name@upi');
+ if(S.pay=='Card'&&$('#cn').value.replace(/\s/g,'').length<12)return toast('Enter a valid card number');
+ const b=bill(),pb=$('#pb');pb.disabled=true;pb.textContent=S.pay=='COD'?'Placing order…':'Processing payment securely…';
+ setTimeout(()=>{const o={id:'KF'+(1000+S.orders.length+1),items:Object.keys(S.cart).map(i=>({id:+i,q:S.cart[i]})),total:b.total,pay:S.pay,slot:$('#slot').value,st:0,date:new Date().toLocaleString('en-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}),rating:0,fb:''};
+ S.orders.unshift(o);S.pts+=Math.floor(b.total/10);S.cart={};S.coupon=null;save();toast('Order placed! +'+Math.floor(b.total/10)+' points');S.tab='orders';S.view=o.id;render();autoTrack(o.id)},1400)}
+function autoTrack(id){const t=setInterval(()=>{const o=S.orders.find(x=>x.id==id);if(!o||o.st>=3)return clearInterval(t);o.st++;save();if(S.tab=='orders')render();if(o.st==3)toast('Order '+id+' delivered 🎉')},6000)}
+
+function orders(){if(S.view){const o=S.orders.find(x=>x.id==S.view);if(o)return track(o)}
+ if(!S.orders.length){main.innerHTML=`<div class="empty"><div class="e">📦</div><h3>No orders yet</h3><p>Your orders and tracking will appear here.</p><button class="btn" onclick="go('shop')">Browse produce</button></div>`;return}
+ main.innerHTML=`<h2 class="h">My orders</h2>`+S.orders.map(o=>`<div class="card"><div class="row"><b>#${o.id}</b><span class="note">${o.date}</span></div><div style="font-size:26px">${o.items.map(i=>P.find(p=>p.id==i.id).e).join(' ')}</div><div class="row"><span>${inr(o.total)} · ${o.pay}</span><b style="color:var(--g)">${STEPS[o.st]}</b></div><div class="row" style="margin-top:10px"><button class="btn alt sm" onclick="go('orders','${o.id}')">Track</button><button class="btn sm" onclick="reorder('${o.id}')">🔁 Reorder</button></div></div>`).join('')}
+function track(o){main.innerHTML=`<button class="chip" onclick="go('orders')">← All orders</button><h2 class="h" style="margin-top:12px">Order #${o.id}</h2>
+<div class="card">${STEPS.map((s,i)=>`<div class="step ${i<o.st||o.st==3&&i==3?'done':i==o.st?'cur':''}"><i>${i<o.st||o.st==3&&i==3?'✓':i+1}</i><b>${s}</b></div>`).join('')}<div class="note">${o.slot} · Demo: status updates every few seconds.</div>${o.st<3?`<button class="btn alt sm" style="margin-top:8px" onclick="nextSt('${o.id}')">Skip to next step (demo)</button>`:''}</div>
+<div class="card">${o.items.map(i=>{const p=P.find(x=>x.id==i.id);return`<div class="row line"><span>${p.e} ${p.n} × ${i.q} kg</span><span>${inr(p.p*i.q)}</span></div>`}).join('')}<div class="row tot" style="padding-top:8px"><span>Paid (${o.pay})</span><span>${inr(o.total)}</span></div></div>
+${o.st==3?feedback(o):''}<button class="btn wa" onclick="wa('Hi KovaiFresh, regarding order ${o.id}')">💬 Contact on WhatsApp</button>`}
+function nextSt(id){const o=S.orders.find(x=>x.id==id);if(o.st<3)o.st++;save();render()}
+function feedback(o){return`<div class="card"><b>Rate this delivery</b><div class="stars">${[1,2,3,4,5].map(n=>`<button class="${n<=o.rating?'on':''}" onclick="rate('${o.id}',${n})">★</button>`).join('')}</div>${o.rating?(o.fb?`<p class="note">Thanks for your feedback: “${o.fb.replace(/</g,'&lt;')}”</p>`:`<textarea id="fb" rows="2" placeholder="Tell us more (optional)"></textarea><button class="btn sm" onclick="sendFb('${o.id}')">Send feedback</button>`):''}</div>`}
+function rate(id,n){S.orders.find(x=>x.id==id).rating=n;save();render()}
+function sendFb(id){const o=S.orders.find(x=>x.id==id);o.fb=$('#fb').value.trim()||'(no comment)';save();toast('Feedback sent. +5 points');S.pts+=5;render()}
+function reorder(id){const o=S.orders.find(x=>x.id==id);S.cart={};o.items.forEach(i=>S.cart[i.id]=i.q);toast('Items added to cart');go('cart')}
+function wa(m){window.open('https://wa.me/919999999999?text='+encodeURIComponent(m),'_blank')}
+
+function profile(){const rev=S.orders.reduce((a,o)=>a+o.total,0),tier=S.pts>=100?'Gold':S.pts>=40?'Silver':'Green';
+ main.innerHTML=`<div class="card"><div class="row"><div><h3>${S.user.n}</h3><div class="note">${S.user.p}<br>${S.user.a}</div></div><span style="font-size:40px">🧑‍🌾</span></div></div>
+<div class="card"><b>Loyalty rewards</b><div class="kpi" style="margin-top:8px"><div><b>${S.pts}</b><small>Points</small></div><div><b>${tier}</b><small>Tier</small></div><div><b>${S.orders.length}</b><small>Orders</small></div></div><p class="note">Earn 1 point per ₹10. Share code <b>KOVAI-${S.user.n.slice(0,3).toUpperCase()}</b> – friends get ₹20 off.</p>
+<button class="btn alt sm" onclick="share()">📤 Share referral code</button></div>
+<div class="card"><b>Shop owner view (admin)</b><div class="kpi" style="margin-top:8px"><div><b>${inr(rev)}</b><small>Sales</small></div><div><b>${S.orders.length?inr(rev/S.orders.length):'₹0'}</b><small>Avg order</small></div><div><b>${S.orders.filter(o=>o.st<3).length}</b><small>Open</small></div></div>
+${(()=>{const t={};S.orders.forEach(o=>o.items.forEach(i=>t[i.id]=(t[i.id]||0)+i.q));const k=Object.keys(t).sort((a,b)=>t[b]-t[a])[0];return k?`<p class="note">Top item: ${P.find(p=>p.id==k).e} ${P.find(p=>p.id==k).n} (${t[k]} kg)</p>`:'<p class="note">Place an order to see the sales summary.</p>'})()}</div>
+<div class="card"><b>Help & FAQ</b><details><summary>How long does delivery take?</summary><p class="note">Express delivery takes about 2 hours within 5 km.</p></details><details><summary>Is my payment safe?</summary><p class="note">Yes. Payments use an RBI-compliant gateway; card numbers are never stored.</p></details><details><summary>How do I get a refund?</summary><p class="note">Contact us on WhatsApp within 2 hours of delivery.</p></details></div>
+<button class="btn alt" onclick="S.user=null;S.orders=[];S.pts=0;save();S.tab='shop';render()">Log out and reset demo</button>`}
+function share(){const t='Order fresh veggies on KovaiFresh! Use my code KOVAI-'+S.user.n.slice(0,3).toUpperCase()+' for ₹20 off.';if(navigator.share)navigator.share({text:t}).catch(()=>{});else{wa(t)}}
+
+function render(){if(!S.user){signup();return}renderNav();({shop,cart:()=>S.view=='checkout'?checkout():cart(),orders,profile})[S.tab]()}
+$('#wa').onclick=()=>wa('Hi KovaiFresh, I need help with my order');
+load();S.orders.filter(o=>o.st<3).forEach(o=>autoTrack(o.id));render();
+</script>
+</body>
+</html>
